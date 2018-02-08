@@ -1,0 +1,22 @@
+package main
+
+import (
+        "flag"
+        "selflib/proxy"
+        "log"
+       )
+
+
+func main() {
+    var faddr, baddr string
+    flag.StringVar(&faddr, "listen", ":9901", "listening ip port")
+    flag.StringVar(&baddr, "backend", ":8110", "backend ip port")
+
+    flag.Parse()
+
+    proxy := proxy.NewProxy(faddr, baddr)
+
+    log.Printf("proxy is running... listening on %s\n", faddr)
+    proxy.Run()
+}
+
